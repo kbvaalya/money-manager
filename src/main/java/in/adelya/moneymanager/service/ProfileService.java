@@ -82,9 +82,12 @@ public class ProfileService {
                 .orElse(false);
     }
 
+    // НУЖНО — брать из JWT токена
     public ProfileEntity getCurrentProfile() {
-        return profileRepository.findById(1L)
-                .orElseThrow(() -> new RuntimeException("Default profile with id=1 not found"));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        return profileRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Profile not found"));
     }
 
     public ProfileDTO getPublicProfile(String email) {
