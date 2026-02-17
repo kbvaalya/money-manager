@@ -35,11 +35,6 @@ public class ProfileController {
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody AuthDTO authDTO) {
         try {
-            if (!profileService.isAccountActivate(authDTO.getEmail())) {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Map.of(
-                        "message", "Account is not active. Please activate your account."
-                ));
-            }
             Map<String, Object> response = profileService.authenticateAndGenerateToken(authDTO);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e){

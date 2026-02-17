@@ -83,9 +83,8 @@ public class ProfileService {
     }
 
     public ProfileEntity getCurrentProfile() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return profileRepository.findByEmail(authentication.getName())
-                .orElseThrow(() -> new UsernameNotFoundException("Profile not found with email address: " + authentication.getName()));
+        return profileRepository.findById(1L)
+                .orElseThrow(() -> new RuntimeException("Default profile with id=1 not found"));
     }
 
     public ProfileDTO getPublicProfile(String email) {

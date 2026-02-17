@@ -37,7 +37,7 @@
         @PrePersist
         public void prePersist() {
             if (this.isActive == null) {
-                this.isActive = false;
+                this.isActive = true;
             }
         }
     }
